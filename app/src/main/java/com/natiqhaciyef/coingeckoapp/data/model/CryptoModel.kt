@@ -1,5 +1,8 @@
 package com.natiqhaciyef.coingeckoapp.data.model
 
+import androidx.room.Entity
+
+
 data class CryptoModel(
     val id: String,
     val name: String,

@@ -21,6 +21,7 @@ object LocalModule {
     @Singleton
     fun provideDao(@ApplicationContext context: Context) =
         Room.databaseBuilder(context, AppDatabase::class.java, "app_database")
+            .fallbackToDestructiveMigration()
             .build()
             .getDao()
 

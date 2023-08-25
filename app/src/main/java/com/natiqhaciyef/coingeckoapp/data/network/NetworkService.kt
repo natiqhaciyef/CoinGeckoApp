@@ -10,12 +10,12 @@ interface NetworkService {
     suspend fun getAllCryptos(
         @Query("vs_currency") vs_currency: String = "usd",
         @Query("order") order: String = "market_cap_desc",
-        @Query("per_page") per_page: Int = 100,
+        @Query("per_page") per_page: Int = 1,
         @Query("page") page: Int = 1,
         @Query("sparkline") sparkline: Boolean = true,
         @Query("price_change_percentage") price_change_percentage: String = "24h",
-        @Query("precision") precision: Int = 1,
         @Query("locale") locale: String = "en",
-    ) : List<CryptoModel>
+        @Query("precision") precision: String = "1",
+    ) : List<CryptoModel>?
 
 }

@@ -13,7 +13,7 @@ class HomeViewModel @Inject constructor(
     private val networkRepo: NetworkRepository
 ): BaseViewModel() {
 
-    private val _cryptoLiveData = MutableLiveData<List<CryptoModel>>()
+    private val _cryptoLiveData = MutableLiveData<List<CryptoModel>?>()
     val cryptoLiveData get() = _cryptoLiveData
 
     init {

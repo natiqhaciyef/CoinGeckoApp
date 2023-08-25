@@ -17,25 +17,16 @@ class DetailsViewModel @Inject constructor(
 ) : BaseViewModel(){
     val cryptoLiveData = MutableLiveData<CryptoModel>()
 
-    init {
-        getAllFromLocalDB()
-    }
 
     fun getCryptoById(id: String = "bitcoin"){
         viewModelScope.launch {
-            cryptoLiveData.value = networkRepo.getFilteredCoins(id).first()
+            cryptoLiveData.value = networkRepo.getFilteredCoins(id)?.first()
         }
     }
 
-    fun insertCrypto(cryptoEntity: CryptoEntity){
+    fun insertCrypto(cryptoEntity: CryptoEntity) {
         viewModelScope.launch {
             localRepo.insertCrypto(cryptoEntity)
-        }
-    }
-
-    fun getAllFromLocalDB(){
-        viewModelScope.launch {
-            println(localRepo.getAll())
         }
     }
 

@@ -8,9 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import  com.natiqhaciyef.coingeckoapp.view.adapter.behaviour.OnClickAction
 import com.natiqhaciyef.coingeckoapp.R
-import com.natiqhaciyef.coingeckoapp.data.model.CryptoModel
 import com.natiqhaciyef.coingeckoapp.databinding.FragmentHomeBinding
 import com.natiqhaciyef.coingeckoapp.view.adapter.CoinAdapter
 import com.natiqhaciyef.coingeckoapp.viewmodel.HomeViewModel
@@ -31,14 +29,22 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.cryptoLiveData.observe(viewLifecycleOwner) { coinsList ->
-            val adapter = CoinAdapter(requireContext(), coinsList)
-            binding.recyclerCoins.layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-            binding.recyclerCoins.adapter = adapter
+            if (!coinsList.isNullOrEmpty()) {
+                val adapter = CoinAdapter(requireContext(), coinsList)
+                binding.recyclerCoins.layoutManager =
+                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                binding.recyclerCoins.adapter = adapter
 
-            adapter.setOnClickData { coin ->
-                val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(coin.id)
-                findNavController().navigate(action)
+                binding.savedCurrenciesButton.setOnClickListener {
+                    findNavController().navigate(R.id.savedCurrenciesFragment)
+                }
+
+                adapter.setOnClickData { coin ->
+                    val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(coin.id)
+                    findNavController().navigate(action)
+                }
+            }else{
+                println("Data is empty")
             }
         }
     }

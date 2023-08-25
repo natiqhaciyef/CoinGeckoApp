@@ -54,7 +54,8 @@ class DetailsFragment : Fragment() {
                     dailyLow = coin.low_24h,
                     dailyHigh = coin.high_24h,
                     totalVolume = numberFormatted,
-                    change = coin.price_change_percentage_24h_in_currency
+                    change = coin.price_change_percentage_24h_in_currency,
+                    image = coin.image
                 )
 
                 viewModel.insertCrypto(cryptoEntity)

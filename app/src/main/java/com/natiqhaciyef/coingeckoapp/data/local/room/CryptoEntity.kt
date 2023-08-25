@@ -13,4 +13,5 @@ data class CryptoEntity(
     var dailyHigh: Double,
     var totalVolume: String,
     var change: Double,
+    var image: String
 )
